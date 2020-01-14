@@ -9,13 +9,12 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLOutput;
 import java.util.List;
 
 /**
  * 测试类
  */
-public class MybatisTest  {
+public class MybatisTest {
     public static void main(String[] args) throws IOException {
         //1.读取配置文件
         InputStream in = Resources.getResourceAsStream("likang.xml");
@@ -28,7 +27,7 @@ public class MybatisTest  {
         IUserDao userDao = session.getMapper(IUserDao.class);
         //5.使用代理对象执行方法
         List<User> users = userDao.findAll();
-        for (User user :users){
+        for (User user : users) {
             System.out.println(user);
         }
         //6.释放资源

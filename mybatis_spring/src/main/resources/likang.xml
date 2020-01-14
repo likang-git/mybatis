@@ -38,8 +38,10 @@
                 </dataSource>
             </environment>
         </environments>
-    <!--指定映射配置文件的位子-->
+    <!--指定映射配置文件的位子
+    如果使用注解方式则用class指定-->
     <mappers>
         <mapper resource="com/lk/dao/IUserDao.xml"></mapper>
+        <!--<mapper class="com.likang.IDao.IUserDao"></mapper>-->
     </mappers>
 </configuration>
