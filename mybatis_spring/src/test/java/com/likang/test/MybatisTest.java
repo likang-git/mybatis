@@ -32,13 +32,13 @@ public class MybatisTest {
         for (User user : users) {
             System.out.println(user);
         }*/
-        MybatisTest.addUser(userDao,session );
+        MybatisTest.addUser(userDao, session);
         //6.释放资源
         session.close();
         in.close();
     }
 
-    public static void addUser(IUserDao userDao,SqlSession sqlSession){
+    public static void addUser(IUserDao userDao, SqlSession sqlSession) {
 //        User user = new User(3,"帅哥5",new Date(),"男5","天下5");
 //        userDao.saveUser(user);
 //        userDao.updateUser(user);
@@ -46,11 +46,18 @@ public class MybatisTest {
 //        User user1 =  userDao.findUserById(1);
 //        System.out.println(user1);
 //        sqlSession.commit();
-         List<User> users  =   userDao.findByName("李");
-         for (User user :users){
-             System.out.println(user);
-         }
+//         List<User> users  =   userDao.findByName("李");
+//         for (User user :users){
+//             System.out.println(user);
+//         }
 //        System.out.println(userDao.findNum());
+        User user = new User();
+        user.setId(1);
+        user.setUserName("康");
+        List<User> users = userDao.queryList(user);
+        for (User user1 : users){
+            System.out.println(user1);
+        }
         System.out.println("我成功了");
     }
 }
