@@ -39,11 +39,18 @@ public class MybatisTest {
     }
 
     public static void addUser(IUserDao userDao,SqlSession sqlSession){
-        User user = new User(3,"帅哥5",new Date(),"男5","天下5");
+//        User user = new User(3,"帅哥5",new Date(),"男5","天下5");
 //        userDao.saveUser(user);
 //        userDao.updateUser(user);
-        userDao.deleteUser(3);
-        sqlSession.commit();
+//        userDao.deleteUser(3);
+//        User user1 =  userDao.findUserById(1);
+//        System.out.println(user1);
+//        sqlSession.commit();
+         List<User> users  =   userDao.findByName("李");
+         for (User user :users){
+             System.out.println(user);
+         }
+//        System.out.println(userDao.findNum());
         System.out.println("我成功了");
     }
 }

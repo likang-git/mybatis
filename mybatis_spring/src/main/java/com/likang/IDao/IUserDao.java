@@ -12,4 +12,7 @@ public interface IUserDao {
     void saveUser(User user);
     void updateUser(User user);
     void deleteUser(int id);
+    User findUserById(int id);
+    List<User> findByName(String userName);
+    int findNum();
 }
