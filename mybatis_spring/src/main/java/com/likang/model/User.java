@@ -13,6 +13,13 @@ public class User implements Serializable {
     private String sex;
     private String address;
 
+    public User(int id ,String userName ,Date birthday ,String sex ,String address){
+        this.id = id ;
+        this.userName = userName;
+        this.birthday = birthday;
+        this.sex = sex;
+        this.address =address;
+    }
     public int getId() {
         return id;
     }

@@ -6,4 +6,16 @@
     <select id="findAll" resultType="com.likang.model.User">
         select  * from lk_user
     </select>
+    <insert id="saveUser" parameterType="com.likang.model.User">
+        insert into lk_user(id,username,birthday,sex,address)
+        values(#{id},#{userName},#{birthday},#{sex},#{address})
+    </insert>
+    <update id="updateUser" parameterType="com.likang.model.User">
+        update lk_user
+        set id=#{id},username=#{userName},birthday=#{birthday},sex=#{sex},address=#{address}
+        where id = #{id}
+    </update>
+    <delete id="deleteUser" parameterType="int" >
+        delete from lk_user where id=#{id}
+    </delete>
 </mapper>

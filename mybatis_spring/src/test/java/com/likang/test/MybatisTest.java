@@ -6,9 +6,11 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,13 +28,22 @@ public class MybatisTest {
         //4.使用Sqlsession创建Dao的代理对象
         IUserDao userDao = session.getMapper(IUserDao.class);
         //5.使用代理对象执行方法
-        List<User> users = userDao.findAll();
+       /* List<User> users = userDao.findAll();
         for (User user : users) {
             System.out.println(user);
-        }
+        }*/
+        MybatisTest.addUser(userDao,session );
         //6.释放资源
         session.close();
         in.close();
     }
 
+    public static void addUser(IUserDao userDao,SqlSession sqlSession){
+        User user = new User(3,"帅哥5",new Date(),"男5","天下5");
+//        userDao.saveUser(user);
+//        userDao.updateUser(user);
+        userDao.deleteUser(3);
+        sqlSession.commit();
+        System.out.println("我成功了");
+    }
 }
