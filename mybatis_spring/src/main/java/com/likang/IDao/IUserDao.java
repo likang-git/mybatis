@@ -16,4 +16,5 @@ public interface IUserDao {
     List<User> findByName(String userName);
     int findNum();
     List<User> queryList(User user);
+    List<User> selectForeach(int[] ids);
 }

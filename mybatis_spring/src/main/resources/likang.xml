@@ -22,6 +22,22 @@
 
     <!--    -->
     <configuration>
+    <!-- properties可以在标签内配置数据库信息，也可以引用外部pei'配置文件信息
+     resource 标签  直接引用源文件
+     Url标签  可以唯一标识一个资源的位置
+     如：-->
+    <!--<properties resource="jdbcConfig.properties">
+
+    </properties>-->
+    <properties url="file:///E:/mybatis/mybatis_spring/src/main/resources/jdbcConfig.properties">
+
+    </properties>
+    <!--使用typeAliases配置别名，它只能配置domain中的类别名,不区分大小写-->
+    <typeAliases>
+        <!--<typeAlias type="com.likang.model.User" alias="user"></typeAlias>-->
+        <!--package 配置别名的包 该包下的实体类都会注册别名，并且别名就是类名 不区分大小写-->
+        <package name="com.likang.model"></package>
+    </typeAliases>
         <!--配置环境-->
         <environments default="postgres">
             <!--配置postgres环境-->
@@ -31,17 +47,19 @@
                 <!--配置数据源（连接池）-->
                 <dataSource type="POOLED">
                     <!--配置连接数据库的四个基本信息-->
-                    <property name="driver" value="org.postgresql.Driver"></property>
-                    <property name="url" value="jdbc:postgresql://localhost:5432/postgres"></property>
-                    <property name="username" value="postgres"></property>
-                    <property name="password" value="123456"></property>
+                    <property name="driver" value="${jdbc.driver}"></property>
+                    <property name="url" value="${jdbc.url}"></property>
+                    <property name="username" value="${jdbc.username}"></property>
+                    <property name="password" value="${jdbc.password}"></property>
                 </dataSource>
             </environment>
         </environments>
     <!--指定映射配置文件的位子
-    如果使用注解方式则用class指定-->
+    如果使用注解方式则用class指定
+    package标签需要直接指定dao里面的包-->
     <mappers>
         <mapper resource="com/lk/dao/IUserDao.xml"></mapper>
+        <mapper resource="com/lk/dao/IAccountDao.xml"></mapper>
         <!--<mapper class="com.likang.IDao.IUserDao"></mapper>-->
     </mappers>
 </configuration>

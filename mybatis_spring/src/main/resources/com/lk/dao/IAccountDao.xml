@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.likang.IDao.IAccountDao">
+   <!-- <resultMap id="acountVoResule" type="com.likang.model.AcountVo">
+        <result property="id" column="id"></result>
+        <result property="money" column="money"></result>
+        <result property="userName" column="username"></result>
+        <result property="address" column="address"></result>
+        <result property="sex" column="sex"></result>
+    </resultMap>-->
+    <select id="findAllVo" resultType="AcountVo">
+        select * from account a
+        left join lk_user u on a.uid = u.id
+    </select>
+
+    <select id="findAll" resultType="Account">
+        select * from account
+    </select>
+</mapper>

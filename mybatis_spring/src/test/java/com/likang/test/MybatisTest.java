@@ -1,11 +1,15 @@
 package com.likang.test;
 
+import com.likang.IDao.IAccountDao;
 import com.likang.IDao.IUserDao;
+import com.likang.model.Account;
+import com.likang.model.AcountVo;
 import com.likang.model.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -18,6 +22,7 @@ import java.util.List;
  */
 public class MybatisTest {
     public static void main(String[] args) throws IOException {
+        Logger logger = Logger.getLogger(MybatisTest.class);
         //1.读取配置文件
         InputStream in = Resources.getResourceAsStream("likang.xml");
         //2.创建SqlSessionFactory工厂
@@ -27,12 +32,21 @@ public class MybatisTest {
         SqlSession session = factory.openSession();
         //4.使用Sqlsession创建Dao的代理对象
         IUserDao userDao = session.getMapper(IUserDao.class);
+        IAccountDao accountDao = session.getMapper(IAccountDao.class);
+//       List<Account> accounts =  accountDao.findAll();
+//       for (Account account : accounts){
+//           System.out.println(account);
+//       }
+        List<AcountVo> acountVos = accountDao.findAllVo();
+        for (AcountVo acountVo : acountVos){
+            System.out.println(acountVo);
+        }
         //5.使用代理对象执行方法
-       /* List<User> users = userDao.findAll();
+      /*  List<User> users = userDao.findAll();
         for (User user : users) {
             System.out.println(user);
         }*/
-        MybatisTest.addUser(userDao, session);
+//        MybatisTest.addUser(userDao, session);
         //6.释放资源
         session.close();
         in.close();
@@ -51,13 +65,17 @@ public class MybatisTest {
 //             System.out.println(user);
 //         }
 //        System.out.println(userDao.findNum());
-        User user = new User();
-        user.setId(1);
-        user.setUserName("康");
-        List<User> users = userDao.queryList(user);
-        for (User user1 : users){
-            System.out.println(user1);
+//        User user = new User();
+//        user.setId(1);
+//        user.setUserName("康");
+//        List<User> users = userDao.queryList(user);
+//        for (User user1 : users){
+//            System.out.println(user1);
+//        }
+          int[] ids = {1,2};
+          List<User> users = userDao.selectForeach(ids);
+        for (User user : users){
+            System.out.println(user);
         }
-        System.out.println("我成功了");
     }
 }
